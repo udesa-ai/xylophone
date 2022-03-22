@@ -14,11 +14,10 @@ public:
 private:
   int angle2PWM(double x, int i);
   void key_up(int key);
-  int delay1 = 1000;
+  int delay1 = 50;
   int delay2 = 500;
   Adafruit_PWMServoDriver pca1;
   Adafruit_PWMServoDriver pca2;
-  int delay_up[NTECLAS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   int delay_down[NTECLAS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   int MIN_IMP[NTECLAS] = { 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500 };;
   int MAX_IMP[NTECLAS] = { 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500 };

@@ -14,7 +14,7 @@ Teclas keyboard = Teclas();
 void setup() {
   //Init Serial USB
   keyboard.initialize();
-  Serial.begin(9600);
+  Serial.begin(57600);
   Serial.println("Initialize System");
   
 }

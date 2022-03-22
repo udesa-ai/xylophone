@@ -13,20 +13,21 @@ void Teclas::initialize(){
   pca2.begin();
   pca2.setPWMFreq(50);  // Analog servos run at ~50 Hz updates
   
-  for(int i = 0; i<NTECLAS; i++){
+  for(int i = 0; i< NTECLAS; i++){
+      delay(100);
       play_key(i);
-  }
-  delay(200);
-  for(int i = 0; i < NTECLAS; i++){
+      delay_down[i] = 0;
+      delay(100);
       key_up(i);
   }
+  
 }
 
 void Teclas::play_key(int key){
   if (key < 9){
-    pca1.writeMicroseconds(key, angle2PWM(40, key));
+    pca1.writeMicroseconds(key, angle2PWM(30, key));
   } else {
-    pca2.writeMicroseconds(key - 9, angle2PWM(40, key-9));
+    pca2.writeMicroseconds(key - 9, angle2PWM(30, key));
   }
   delay_down[key] = millis() + delay1;
 }
@@ -35,7 +36,7 @@ void Teclas::key_up(int key){
   if (key < 9){
     pca1.writeMicroseconds(key, angle2PWM(50, key));
   } else {
-    pca2.writeMicroseconds(key - 9, angle2PWM(50, key-9));
+    pca2.writeMicroseconds(key - 9, angle2PWM(50, key));
   }
 }
 
