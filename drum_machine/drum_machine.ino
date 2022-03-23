@@ -29,6 +29,12 @@ void loop() {
     keyboard.play_key(data-1);
   }
 
+//   for (int i = 0; i < 18; i++){
+//      keyboard.play_key(i);
+//      delay(50);
+//      keyboard.key_up(i);
+//      delay(100);
+//   }
+
   keyboard.play_loop();
-//  pcaScenario();
 }
