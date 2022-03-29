@@ -16,25 +16,22 @@ m2a2 = {56: '01', 58: '02', 61: '03',
         78: '10', 80: '11', 82: '12'}
 
 
-arduino1 = serial.Serial(port='/dev/ttyUSB0', baudrate=57600, timeout=.1)
-arduino2 = serial.Serial(port='/dev/ttyUSB1', baudrate=57600, timeout=.1)
+arduino1 = serial.Serial(port='/dev/ttyUSB0', baudrate=115200, timeout=.1)
+arduino2 = serial.Serial(port='/dev/ttyUSB1', baudrate=115200, timeout=.1)
 time.sleep(2)
-
-
-def write1(x):
-    arduino1.write(bytes(x, 'utf-8'))
-
-def write2(x):
-    arduino2.write(bytes(x, 'utf-8'))
+    
 
 def parse(file):
     mid = MidiFile(file)
     for msg in mid.play():
         if msg.type == 'note_on':
             if msg.note in m2a:
-                write1(m2a[msg.note])
+                mess = str(m2a[msg.note]) + ('0'+str(msg.velocity) if msg.velocity<100 else str(msg.velocity))
+                arduino1.write(bytes(mess, 'utf-8'))
             elif msg.note in m2a2:
-                write2(m2a2[msg.note])
+                mess = str(m2a2[msg.note]) + ('0'+str(msg.velocity) if msg.velocity<100 else str(msg.velocity))
+                print(mess)
+                arduino2.write(bytes(mess, 'utf-8'))
 
 
 

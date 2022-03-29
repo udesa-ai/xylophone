@@ -9,7 +9,7 @@ class Teclas {
 public:
   Teclas();
   void initialize();
-  void play_key(int key);
+  void play_key(int key, int vel);
   void play_loop();
   void key_up(int key);
 private:
@@ -22,8 +22,10 @@ private:
   int MAX_IMP[NTECLAS] = { 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500 };
   int MIN_ANG[NTECLAS] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   int MAX_ANG[NTECLAS] = { 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180, 180 };
-//                          1   2   3   4   5   6   7   8   9  10  11  12
-  int CORECTOR[NTECLAS] = { 0, 10,  2, -1,  0, -8,  5,  0,  5,  2,  1, -4 };
-  int low_note[NTECLAS] = { 0,  0,  0,  5,  0,  0,  0,  0,  0,  1,  0,  0 };
+//                                  1    2    3    4    5    6    7    8    9   10   11   12
+  float CORECTOR[NTECLAS] =      {  0,  10,   2,  -1,   0,  -8,   5,   0,   5,   2,   1,  -4 };
+  float low_note_soft[NTECLAS] = { 80,  80,  80,  80,  80,  80,  80,  80,  80,  80,  80,  80 };
+  float low_note_hard[NTECLAS] = { 85,  85,  85,  85,  85,  85,  85,  85,  85,  85,  85,  85 };
+  float high_note[NTECLAS] =     { 70,  70,  70,  70,  70,  70,  70,  70,  70,  70,  70,  70 };
 };
 #endif
