@@ -13,6 +13,7 @@ public:
   void play_loop();
   void key_up(int key);
 private:
+  void key_startup();
   int angle2PWM(double x, int i);
   int delay1 = 50;
   int delay2 = 500;

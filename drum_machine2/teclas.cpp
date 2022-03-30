@@ -9,6 +9,8 @@ void Teclas::initialize(){
   pca1 = Adafruit_PWMServoDriver(0x40);
   pca1.begin();
   pca1.setPWMFreq(50);  // Analog servos run at ~50 Hz updates
+
+//  key_startup();
 }
 
 void Teclas::play_key(int key, int vel){
@@ -28,7 +30,12 @@ void Teclas::key_up(int key){
 //  pca1.writeMicroseconds(key, angle2PWM(70, key));
 }
 
-
+void Teclas::key_startup(){
+    for(int key = 0; key< NTECLAS; key++){
+        delay(100);
+        pca1.writeMicroseconds(key, angle2PWM(high_note[key], key));
+    }
+}
 
 
 void Teclas::play_loop(){
