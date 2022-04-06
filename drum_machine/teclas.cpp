@@ -33,6 +33,21 @@ void Teclas::play_key(int key, int vel){
   
 }
 
+void Teclas::calib(int key, float angle){
+  key = key - 1;
+  if (delay_down[key] == 0){
+    float angle2 =  low_note_hard[key] + angle/10;
+    Serial.println(angle2);
+    if (key < 9){
+      pca1.writeMicroseconds(key, angle2PWM(angle2, key));
+    } else {
+      pca2.writeMicroseconds(key - 9, angle2PWM(angle2, key));
+    }
+    delay_down[key] = millis() + delay1;
+  }
+  
+}
+
 void Teclas::key_up(int key){
   delay_down[key] = 0;
   if (key < 9){

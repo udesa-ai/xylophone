@@ -12,6 +12,7 @@ int data2 = 0;
 int data3 = 0;
 int data4 = 0;
 int data5 = 0;
+float angle;
 
 Teclas keyboard = Teclas();
 
@@ -33,18 +34,12 @@ void loop() {
     data5 = Serial.read() - 48;
     note = data1*10 + data2;
     vel = data3*100 + data4*10 + data5;
-//    Serial.print(note);
-//    Serial.print("     ");
-//    Serial.println(vel);
+//    angle = data3*100 + data4*10 + data5;
+
     keyboard.play_key(note, vel);
+//    keyboard.calib(note, angle);
   }
 
-//   for (int i = 0; i < 18; i++){
-//      keyboard.play_key(i);
-//      delay(50);
-//      keyboard.key_up(i);
-//      delay(100);
-//   }
 
   keyboard.play_loop();
 }

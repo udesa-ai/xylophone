@@ -10,7 +10,7 @@ void Teclas::initialize(){
   pca1.begin();
   pca1.setPWMFreq(50);  // Analog servos run at ~50 Hz updates
 
-//  key_startup();
+  key_startup();
 }
 
 void Teclas::play_key(int key, int vel){
@@ -32,7 +32,7 @@ void Teclas::key_up(int key){
 
 void Teclas::key_startup(){
     for(int key = 0; key< NTECLAS; key++){
-        delay(100);
+        delay(1000);
         pca1.writeMicroseconds(key, angle2PWM(high_note[key], key));
     }
 }
