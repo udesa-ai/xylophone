@@ -1,7 +1,8 @@
 from serial import Serial
+from logger import logger
 
 
-class Xylofon:
+class BaseXylo:
     MAPPING = {
         'G4':'18', 'A4':'17', 'B4':'16',
         'C5':'15', 'D5':'14', 'E5':'13',
@@ -14,21 +15,31 @@ class Xylofon:
         'A#5': '07', 'C#6': '08', 'D#6': '09',
         'F#6': '10', 'G#6': '11', 'A#6': '12',
     }
-
-
-    def __init__(self, port='/dev/ttyUSB0', baudrate=115200, timeout=0.1):
-        self.device = Serial(port=port, baudrate=baudrate, timeout=timeout)
-
-
+    
     def _format_velocity(self, velocity: int) -> str:
         return '0' + str(velocity) if velocity < 100 else str(velocity)
+
+
+class MockXylo(BaseXylo):
+    def write(self, message):
+        logger.debug(f'Message was sent: {message}')
+    
+    def send(self, note):
+        print('Note received: {note}')
+        message = self.MAPPING[note.note] + self._format_velocity(note.velocity)
+        self.write(message)
+
+
+class Xylo(BaseXylo):
+    def __init__(self, port='/dev/ttyUSB0', baudrate=115200, timeout=0.1):
+        self.device = Serial(port=port, baudrate=baudrate, timeout=timeout)
 
 
     def write(self, message):
         self.device.write(bytes(message, 'UTF-8'))
 
 
-    def send(self, note, velocity):
-        message = self.MAPPING[note] + self._format_velocity(velocity)
+    def send(self, note):
+        message = self.MAPPING[note] + self._format_velocity(note.velocity)
         self.write(message)
 

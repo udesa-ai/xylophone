@@ -1,19 +1,26 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-from socketserver import BaseRequestHandler, TCPServer
+import json
+
+from socketserver import BaseRequestHandler
+from xylofon import MockXylo
+from xylonote import XyloNote
+
+
+class MockTCPHandler(BaseRequestHandler):
+    xylo = MockXylo()
+
+    def handle(self):
+        self.data = self.request.recv(1024).strip()
+        note = json.loads(self.data, object_hook=XyloNote.from_json)
+        self.xylo.send(note)
+        self.request.sendall(self.data.upper())
 
 
 class TCPHandler(BaseRequestHandler):
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        print(self.data)
+        print(self.data)     
         self.request.sendall(self.data.upper())
-
-
-if __name__ == '__main__':
-    HOST, PORT = 'localhost', 8080
-
-    with TCPServer((HOST,PORT), TCPHandler) as server:
-        server.serve_forever()
 
