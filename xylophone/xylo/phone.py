@@ -1,6 +1,6 @@
 from serial import Serial
-from logger import logger
 
+from ..util.logger import logger
 
 class BaseXylo:
     MAPPING = {
@@ -25,7 +25,7 @@ class MockXylo(BaseXylo):
         logger.debug(f'Message was sent: {message}')
     
     def send(self, note):
-        print('Note received: {note}')
+        print(f'Note received: {note}')
         message = self.MAPPING[note.note] + self._format_velocity(note.velocity)
         self.write(message)
 

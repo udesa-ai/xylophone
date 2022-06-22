@@ -2,10 +2,11 @@
 
 import socket
 
-from xylonote import XyloNote
-from logger import logger
+from ..xylo.note import XyloNote
+from ..util.logger import logger
 
-class XyloAdapter:
+
+class XyloClient:
     def __init__(self, host: str='localhost', port: int=8080):
         self.host = host
         self.port = port
