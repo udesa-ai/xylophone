@@ -1,8 +1,8 @@
 import json
 
 class XyloNote:
-    def __init__(self, note, start_time, velocity):
-        self.note = note
+    def __init__(self, value, start_time, velocity):
+        self.value = value
         self.start_time = start_time
         self.velocity = velocity
     
@@ -19,9 +19,9 @@ class XyloNote:
 
 
     def __str__(self):
-        return f'Note: {self.note} | Start time: {self.start_time} | Velocity: {self.velocity}'
+        return f'Note: {self.value} | Start time: {self.start_time} | Velocity: {self.velocity}'
     
 
     def __repr__(self):
-        return f'{self.__class__}(note={self.note},start_time={self.start_time},velocity={self.velocity}'
+        return f'{self.__class__}(note={self.value},start_time={self.start_time},velocity={self.velocity}'
 
