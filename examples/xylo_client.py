@@ -5,7 +5,7 @@ from xylophone.xylo import XyloNote
 
 
 if __name__ == '__main__':
-    adapter = XyloClient(host='localhost', port=8080)
+    client = XyloClient(host='localhost', port=8080)
     note = XyloNote('A4', '0.5', 90)
-    adapter.send(note)
+    client.send(note)
 
