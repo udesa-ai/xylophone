@@ -2,10 +2,17 @@ import json
 
 class XyloNote:
     def __init__(self, value, start_time, velocity):
+        if velocity > 100:
+            raise ValueError('Please use a velocity below 100')
+        
+        if not isinstance(velocity, int):
+            raise ValueError('Velocity must be an integer')
+
         self.value = value
         self.start_time = start_time
         self.velocity = velocity
     
+
     @staticmethod
     def from_json(json_dct):
         return XyloNote(
