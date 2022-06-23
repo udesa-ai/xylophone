@@ -12,10 +12,19 @@ class XyloClient:
         self.port = port
     
 
-    def send(self, note: XyloNote):
+    def play(self):
+        self._socket_send('play')
+
+
+    def load(self, notes):
+        for note in notes:
+            self.send(note)
+
+
+    def send(self, note):
         if not isinstance(note, XyloNote):
             raise ValueError("note is not a XyloNote")
-        
+
         data = note.to_json()
         self._socket_send(data)
 

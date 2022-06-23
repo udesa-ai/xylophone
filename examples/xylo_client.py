@@ -5,7 +5,14 @@ from xylophone.xylo import XyloNote
 
 
 if __name__ == '__main__':
+    notes = [
+            XyloNote('A4', 1.5, 90),
+            XyloNote('A4', 2.3, 90),
+            XyloNote('G#6', 5.33333, 90),
+            XyloNote('A4', 10.01, 90),
+            ]
+
     client = XyloClient(host='localhost', port=8080)
-    note = XyloNote('A4', '0.5', 90)
-    client.send(note)
+    client.load(notes)
+    client.play()
 

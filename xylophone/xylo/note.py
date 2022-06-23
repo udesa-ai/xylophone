@@ -9,7 +9,7 @@ class XyloNote:
     @staticmethod
     def from_json(json_dct):
         return XyloNote(
-                json_dct['note'],
+                json_dct['value'],
                 json_dct['start_time'],
                 json_dct['velocity'],
             )

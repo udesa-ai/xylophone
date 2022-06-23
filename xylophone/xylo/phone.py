@@ -1,5 +1,11 @@
+import datetime
+
 from serial import Serial
+from serial.serialutil import SerialException
 from ..util.logger import logger
+
+
+from abc import abstractmethod
 
 class BaseXylo:
     WHITE_MAPPING = {
@@ -16,23 +22,54 @@ class BaseXylo:
         'A#5': '07', 'C#6': '08', 'D#6': '09',
         'F#6': '10', 'G#6': '11', 'A#6': '12',
     }
-    
+
+    buffer = []
+    prev_t = None
+    next_t = None
+
     def _format_velocity(self, velocity: int) -> str:
         return '0' + str(velocity) if velocity < 100 else str(velocity)
+
+    def send(self, note):
+        self.buffer.append(note)
+
+
+    def play(self):
+        if len(self.buffer) == 0:
+            raise RuntimeError('There are no notes to play. Buffer is empty.')
+        
+        self.prev_t = datetime.datetime.now()
+        self.next_t = datetime.datetime.now()
+        
+        while len(self.buffer) > 0:
+            current = (self.next_t - self.prev_t)
+
+            current_time = current.seconds + current.microseconds / 1.0e6
+
+            print(f'Time: {current_time}', end='\r') 
+            
+            if current_time > self.buffer[0].start_time:
+                note = self.buffer.pop(0)
+                self._write_note(note)
+
+            self.next_t = datetime.datetime.now()
+    
+
+    @abstractmethod
+    def _write_note(self, note):
+        raise NotImplementedError('Please override this method')
 
 
 class MockXylo(BaseXylo):
     def write(self, message):
-        logger.debug(f'Message was sent: {message}')
-    
-    def send(self, note):
-        print(f'Note received: {note}')
-        if note.value in self.WHITE_MAPPING or note.value in self.BLACK_MAPPING:
-            self.write(self.WHITE_MAPPING[note.value] +
-                    self._format_velocity(note.velocity))
+        logger.info(f'Message was sent: {message}')
+
+
+    def _write_note(self, note):
+        if note.value in self.WHITE_MAPPING:
+            self.write(self.WHITE_MAPPING[note.value] + self._format_velocity(note.velocity))
         elif note.value in self.BLACK_MAPPING:
-            self.write(self.BLACK_MAPPING[note.value] +
-                    self._format_velocity(note.velocity))
+            self.write(self.BLACK_MAPPING[note.value] + self._format_velocity(note.velocity))
         else:
             raise ValueError('Specified note is not supported')
 
@@ -40,15 +77,22 @@ class MockXylo(BaseXylo):
 class Xylo(BaseXylo):
     def __init__(self, first_port='/dev/ttyUSB0', second_port='/dev/ttyUSB1', baudrate=115200, timeout=0.1):
         self.first_device = Serial(port=first_port, baudrate=baudrate, timeout=timeout)
-        self.second_device = Serial(port=second_port, baudrate=baudrate, timeout=timeout)
+
+        try:
+            self.second_device = Serial(port=second_port, baudrate=baudrate, timeout=timeout)
+        except SerialException:
+            logger.warn('Second device is not connected. Verify that is actually needed.')
+
 
     def write_first(self, message):
         self.first_device.write(bytes(message, 'UTF-8'))
-    
+
+
     def write_second(self, message):
         self.second_device.write(bytes(message, 'UTF-8'))
-    
-    def send(self, note):
+
+
+    def _write_note(self, note):
         if note.value in self.WHITE_MAPPING:
             self.write_first(self.WHITE_MAPPING[note.value] +
                     self._format_velocity(note.velocity))

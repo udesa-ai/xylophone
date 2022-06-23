@@ -1,12 +1,19 @@
-from socketserver import BaseRequestHandler
+import json
 
+from socketserver import BaseRequestHandler
+from ..xylo.note import XyloNote
 
 class TCPHandler(BaseRequestHandler):
 
     def handle(self):
-        # print(self.server.xylo)
-
         self.data = self.request.recv(1024).strip()
-        # TODO: use real Xylophone
+        print(self.data)
+
+        if self.data == b'play':
+            self.server.xylo.play()
+        else:
+            note = json.loads(self.data, object_hook=XyloNote.from_json)
+            self.server.xylo.send(note)
+        
         self.request.sendall(self.data.upper())
 
