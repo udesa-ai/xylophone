@@ -2,6 +2,8 @@ import datetime
 
 from serial import Serial
 from serial.serialutil import SerialException
+
+from ..xylo.note import XyloNote
 from ..util.logger import logger
 
 
@@ -72,6 +74,14 @@ class MockXylo(BaseXylo):
 
 class Xylo(BaseXylo):
     def __init__(self, first_port='/dev/ttyUSB0', second_port='/dev/ttyUSB1', baudrate=115200, timeout=0.1):
+        """Instantiates a Xylo(first_port, second_port, baudrate, timeout)
+
+        Args:
+            first_port (str): first USB device. 
+            second_port (str): second USB device 
+            baudrate (int): default value of the baudrate is 115200.
+            timeout (float): set a read timeout in seconds.
+        """
         self.first_device = Serial(port=first_port, baudrate=baudrate, timeout=timeout)
 
         try:
@@ -80,15 +90,33 @@ class Xylo(BaseXylo):
             logger.warn('Second device is not connected. Verify that is actually needed.')
 
 
-    def write_first(self, message):
+    def write_first(self, message: str) -> None:
+        """Writes to the first device.
+
+        Args:
+            message (str): data to send.
+        """
         self.first_device.write(bytes(message, 'UTF-8'))
 
 
     def write_second(self, message):
+        """Writes to the second device.
+
+        Args:
+            message (str): data to send.
+        """
         self.second_device.write(bytes(message, 'UTF-8'))
 
 
-    def _write_note(self, note):
+    def _write_note(self, note: XyloNote) -> None:
+        """Converts and writes note.
+
+        Args:
+            note (XyloNote): note to write. 
+
+        Raises:
+            ValueError: If note value is not supported, it will fail.
+        """
         if note.value in self.WHITE_MAPPING:
             self.write_first(self.WHITE_MAPPING[note.value] +
                     self._format_velocity(note.velocity))
