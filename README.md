@@ -1,6 +1,10 @@
 # Xylophone
 
 This repository contains a litle Python package that can communicate with real xylophone.
+The communication follows a Client-Server model.
+A client sends notes to the server and afterwards it sends a command to start playing the music sheet.
+A server listen for the client and when the play command arrives, it processes the notes.
+There are two servers, one that communicates with a hardware xylophone, and one that mocks its behaviour.
 
 ## Installation
 
