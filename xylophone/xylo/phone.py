@@ -9,18 +9,14 @@ from abc import abstractmethod
 
 class BaseXylo:
     WHITE_MAPPING = {
-        'G4':'18', 'A4':'17', 'B4':'16',
-        'C5':'15', 'D5':'14', 'E5':'13',
-        'F5':'12', 'G5':'11', 'A5':'10',
-        'B5':'09', 'C6':'08', 'D6':'07',
-        'E6':'06', 'F6':'05', 'G6':'04',
-        'A6':'03', 'B6':'02', 'C7':'01'}
+        'G4':'18', 'A4':'17', 'B4':'16', 'C5':'15', 'D5':'14', 'E5':'13', 'F5':'12', 'G5':'11', 'A5':'10',
+        'B5':'09', 'C6':'08', 'D6':'07', 'E6':'06', 'F6':'05', 'G6':'04', 'A6':'03', 'B6':'02', 'C7':'01'
+    }
 
     BLACK_MAPPING = {
-        'G#4': '01', 'A#4': '02', 'C#5': '03',
-        'D#5': '04', 'F#6': '05', 'G#5': '06',
-        'A#5': '07', 'C#6': '08', 'D#6': '09',
-        'F#6': '10', 'G#6': '11', 'A#6': '12',
+        'G#4': '01', 'Ab4': '01', 'A#4': '02', 'Bb4': '02', 'C#5': '03', 'Db5': '03', 'D#5': '04', 'Eb5': '04',
+        'F#6': '05', 'Gb6': '05', 'G#5': '06', 'Ab5': '06', 'A#5': '07', 'Bb5': '07', 'C#6': '08', 'Db6': '08',
+        'D#6': '09', 'Eb6': '09', 'F#6': '10', 'Gb6': '10', 'G#6': '11', 'Ab6': '11', 'A#6': '12', 'Bb6': '12',
     }
 
     buffer = []
@@ -28,7 +24,7 @@ class BaseXylo:
     next_t = None
 
     def _format_velocity(self, velocity: int) -> str:
-        return '0' + str(velocity) if velocity < 100 else str(velocity)
+        return f'{velocity:03}'
 
     def send(self, note):
         self.buffer.append(note)
@@ -37,23 +33,23 @@ class BaseXylo:
     def play(self):
         if len(self.buffer) == 0:
             raise RuntimeError('There are no notes to play. Buffer is empty.')
-        
+
         self.prev_t = datetime.datetime.now()
         self.next_t = datetime.datetime.now()
-        
+
         while len(self.buffer) > 0:
             current = (self.next_t - self.prev_t)
 
             current_time = current.seconds + current.microseconds / 1.0e6
 
-            print(f'Time: {current_time}', end='\r') 
-            
+            print(f'Time: {current_time}', end='\r')
+
             if current_time > self.buffer[0].start_time:
                 note = self.buffer.pop(0)
                 self._write_note(note)
 
             self.next_t = datetime.datetime.now()
-    
+
 
     @abstractmethod
     def _write_note(self, note):

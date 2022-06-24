@@ -23,6 +23,7 @@ $ cd /path/to/xylophone
 1. Install it with pip
 
 ```shell
+$ pip install -r requirements.txt
 $ pip install .
 ```
 
@@ -46,7 +47,7 @@ if __name__ == '__main__':
     client = XyloClient(host='localhost', port=8080)
     
     # Create a note object. In this case we're instantiating a A$ with 0.5 start time and 90 velocity.
-    note = XyloNote('A4', '0.5', 90)
+    note = XyloNote('A4', 0.5, 90)
 
     # Tell the client to send the note.
     client.send(note)
