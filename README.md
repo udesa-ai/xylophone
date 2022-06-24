@@ -24,10 +24,15 @@ $ git clone https://github.com/udesa-ai/xylophone.git
 $ cd /path/to/xylophone
 ```
 
-1. Install it with pip
+1. Install the dependencies.
 
 ```shell
 $ pip install -r requirements.txt
+```
+
+1. Install it with pip
+
+```shell
 $ pip install .
 ```
 
@@ -38,24 +43,51 @@ First we'll show you how to write a xylophone client that can send commands to t
 
 ### Client
 
+The supported notes are:
+
+| #  | Note | #   | b   |
+|----|------|-----|-----|
+| 1  | C7   | C#7 | Cb7 |
+| 2  | B6   | -   | Bb6 |
+| 3  | A6   | A#6 | Ab6 |
+| 4  | G6   | G#6 | Gb6 |
+| 5  | F6   | F#6 | -   |
+| 6  | E6   | -   | Eb6 |
+| 7  | D6   | D#6 | Db6 |
+| 8  | C6   | C#6 | -   |
+| 9  | B5   | -   | Bb5 |
+| 10 | A5   | A#5 | Ab5 |
+| 11 | G5   | -   | -   |
+| 12 | F5   | -   | -   |
+| 13 | E5   | -   | Eb5 |
+| 14 | D5   | D#5 | Db5 |
+| 15 | C5   | C#5 | -   |
+| 16 | B4   |  -  | Bb4 |
+| 17 | A4   | A#4 | Ab4 |
+| 18 | G4   | G#4 | -   |
+
+
 ```python
-# Import the client and the class that represents a note.
 from xylophone.client import XyloClient
 from xylophone.xylo import XyloNote
 
+# Create and store all the notes in a single list.
+notes = [
+    XyloNote('A4', 1.5, 90),
+    XyloNote('A4', 2.3, 90),
+    XyloNote('G#6', 5.33333, 90),
+    XyloNote('A4', 10.01, 90),
+    ]
 
-if __name__ == '__main__':
-    # Instantiate a client based on XyloClient.
-    # Specify the host or IP address of the server and the port in which it's listening.
-    # By default, the XyloClient will connect to localhost:8080
-    client = XyloClient(host='localhost', port=8080)
-    
-    # Create a note object. In this case we're instantiating a A$ with 0.5 start time and 90 velocity.
-    note = XyloNote('A4', 0.5, 90)
+# Instantiate the client with the IP address or host, and the port.
+# Take a look at the server you spun up or ask someone else for this info.
+client = XyloClient(host='localhost', port=8080)
 
-    # Tell the client to send the note.
-    client.send(note)
-```
+# Load the notes
+client.load(notes)
+
+# Play the song
+client.play()
 
 You can use the example in [here](examples/xilo_client.py).
 
