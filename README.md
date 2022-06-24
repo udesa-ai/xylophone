@@ -88,6 +88,7 @@ client.load(notes)
 
 # Play the song
 client.play()
+```
 
 You can use the example in [here](examples/xilo_client.py).
 
@@ -129,4 +130,3 @@ server.start()
 ```
 
 > Note: Keep in mind that these scripts won't terminate unless you do it.
-
