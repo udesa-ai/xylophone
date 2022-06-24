@@ -1,6 +1,6 @@
 # Xylophone
 
-This repository is contains a litle Python package that can communicate with real xylophone.
+This repository contains a litle Python package that can communicate with real xylophone.
 
 ## Installation
 
