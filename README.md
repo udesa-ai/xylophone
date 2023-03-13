@@ -6,6 +6,31 @@ A client sends notes to the server and afterwards it sends a command to start pl
 A server listen for the client and when the play command arrives, it processes the notes.
 There are two servers, one that communicates with a hardware xylophone, and one that mocks its behaviour.
 
+(insertar imagenes del Xiolfon) 
+
+## Materials List: 
+
+<ul> 
+<li> 28 short mallets of wood 
+<li> 28 MicroServo 9g  SG90 
+<li> 4 support leags of wood (⌀22mm x 33mm)
+<li> 8 support leags of wood (⌀22mm x 39mm)      
+<li> 7 support leags of wood (⌀22mm x 52mm)
+<li> 1 wood stick  (⌀6mm x 655mm)
+<li> 1 wood stick  (⌀6mm x 735mm)
+<li> 20 screws 
+<li> 3 PCA9685 16-Channel 12 Bit PWM Driver 
+<li> 2 Arduino nano (it can be others models of Arduino) 
+<li> wooden Frame Model A 
+<li> Wooden Drame Model B
+<li> 2 DC Plug 5,5 mm 
+<li> 2 DC Female 5,5 mm 
+</ul
+
+
+
+
+
 ## Installation
 
 In order to use this library in another project it must be installed.
