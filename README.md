@@ -24,12 +24,9 @@ The xylophone consists of the following components:
 </ul
 
 ## Electrical diagram
+ <img src="xylophone/1.png" height="2000">
 
-<p align="center">
-    <img src="xylophone/1.png" height="150">
-
-
-  <img src="xylophone/2.png" height="150">
+  <img src="xylophone/2.png" height="2000">
 
 
 
