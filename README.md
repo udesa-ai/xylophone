@@ -1,15 +1,11 @@
 # Xylophone
 
-This repository contains a litle Python package that can communicate with real xylophone.
-The communication follows a Client-Server model.
-A client sends notes to the server and afterwards it sends a command to start playing the music sheet.
-A server listen for the client and when the play command arrives, it processes the notes.
-There are two servers, one that communicates with a hardware xylophone, and one that mocks its behaviour.
-
+This Python project 🪄✨ enables communication with an actual xylophone via a Client-Server setup. A Client sends notes to the Server and instructs it to play the music. The Server, in turn, directs the execution. Two Server modes are provided: one for a physical xylophone 🎹🎶 and another that simulates.
 (insertar imagenes del Xiolfon) 
 
-## Materials List: 
+## Assembly: 
 
+The xylophone consists of the following components:
 <ul> 
 <li> 28 short mallets of wood 
 <li> 28 MicroServo 9g  SG90 
@@ -27,6 +23,7 @@ There are two servers, one that communicates with a hardware xylophone, and one 
 <li> 2 DC Female 5,5 mm 
 </ul
 
+## Electrical diagram
 
 
 
