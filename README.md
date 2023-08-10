@@ -23,7 +23,8 @@ The xylophone consists of the following components:
 <li> 2 DC Female 5,5 mm 
 </ul
 
-## Electrical diagram
+## Electrical Diagram
+
  <img src="xylophone/1.png" height="400">
 
   <img src="xylophone/2.png" height="400">
