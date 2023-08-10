@@ -1,7 +1,8 @@
 # Xylophone
 
 This Python project 🪄✨ enables communication with an actual xylophone via a Client-Server setup. A Client sends notes to the Server and instructs it to play the music. The Server, in turn, directs the execution. Two Server modes are provided: one for a physical xylophone 🎹🎶 and another that simulates.
-(insertar imagenes del Xiolfon) 
+
+<video src="xylophone/" height="400">
 
 ## Assembly: 
 
