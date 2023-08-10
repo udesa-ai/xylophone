@@ -5,6 +5,14 @@ This Python project 🪄✨ enables communication with an actual xylophone via a
 
 ## Assembly: 
 
+### Electrical Diagram:
+
+ <img src="xylophone/1.png" height="400">
+
+ <img src="xylophone/2.png" height="400">
+ 
+### Components: 
+
 The xylophone consists of the following components:
 <ul> 
 <li> 28 short mallets of wood 
@@ -22,12 +30,6 @@ The xylophone consists of the following components:
 <li> 2 DC Plug 5,5 mm 
 <li> 2 DC Female 5,5 mm 
 </ul
-
-### Electrical Diagram:
-
- <img src="xylophone/1.png" height="400">
-
- <img src="xylophone/2.png" height="400">
 
 ## Installation
 
