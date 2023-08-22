@@ -5,7 +5,7 @@ This Python project 🪄✨ enables communication with an actual xylophone via a
 
  <h1>Video Example</h1>
     <video width="640" height="360" controls>
-        <source src="xylophone/vid.mp4" type="video/mp4">
+        <source src="xylophone/VID_20220408_162259 - Trim.mp4" type="video/mp4">
         Tu navegador no admite el elemento de video.
     </video> 
  
