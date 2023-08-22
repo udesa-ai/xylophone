@@ -2,8 +2,12 @@
 
 This Python project 🪄✨ enables communication with an actual xylophone via a Client-Server setup. A Client sends notes to the Server and instructs it to play the music. The Server, in turn, directs the execution. Two Server modes are provided: one for a physical xylophone 🎹🎶 and another that simulates.
 
-<video src="xylophone/vid.mp4" width="420" height="220"></video>
 
+ <h1>Video Example</h1>
+    <video width="640" height="360" controls>
+        <source src="xylophone/vid.mp4" type="video/mp4">
+        Tu navegador no admite el elemento de video.
+    </video> 
  
 ## Assembly: 
 
