@@ -1,10 +1,40 @@
 # Xylophone
 
-This repository contains a litle Python package that can communicate with real xylophone.
-The communication follows a Client-Server model.
-A client sends notes to the server and afterwards it sends a command to start playing the music sheet.
-A server listen for the client and when the play command arrives, it processes the notes.
-There are two servers, one that communicates with a hardware xylophone, and one that mocks its behaviour.
+This Python project:🪄✨ enables communication with an actual xylophone via a Client-Server setup. A Client sends notes to the Server and instructs it to play the music. The Server, in turn, directs the execution. Two Server modes are provided: one for a physical xylophone 🎹🎶 and another that simulates its behaviour.
+
+[![imagen](https://github.com/user-attachments/assets/47c0604e-7067-4e3c-875a-ef61471c7a3c)](https://youtu.be/36S8_7kRTx4)  
+[https://www.youtube.com/watch?v=36S8_7kRTx4](https://youtu.be/36S8_7kRTx4)  
+
+
+## Assembly: 
+
+### Electrical Diagram:
+
+ <img src="xylophone/1.png" height="400">
+
+ <img src="xylophone/2.png" height="400">
+ 
+### Components: 
+
+The xylophone consists of the following components:
+<ul> 
+<li> 28 short mallets of wood 
+<li> 28 MicroServo 9g  SG90 
+<li> 4 support leags of wood (⌀22mm x 33mm)
+<li> 8 support leags of wood (⌀22mm x 39mm)      
+<li> 7 support leags of wood (⌀22mm x 52mm)
+<li> 1 wood stick  (⌀6mm x 655mm)
+<li> 1 wood stick  (⌀6mm x 735mm)
+<li> 20 screws 
+<li> 3 PCA9685 16-Channel 12 Bit PWM Driver 
+<li> 2 Arduino nano (it can be others models of Arduino) 
+<li> wooden Frame Model A 
+<li> Wooden Drame Model B
+<li> 2 DC Plug 5,5 mm 
+<li> 2 DC Female 5,5 mm 
+</ul
+
+
 
 ## Installation
 
